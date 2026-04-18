@@ -18,6 +18,7 @@ public class Product {
     private BigDecimal price;
     private Integer stock;
     private String imageUrl;
+    private String category;
     
     @Column(columnDefinition="TEXT")
     private String description;
@@ -27,13 +28,14 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String brand, BigDecimal price, Integer stock, String imageUrl, String description) {
+    public Product(String name, String brand, BigDecimal price, Integer stock, String imageUrl, String description, String category) {
         this.name = name;
         this.brand = brand;
         this.price = price;
         this.stock = stock;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.category = category;
     }
 
     // Getters and Setters
@@ -57,6 +59,9 @@ public class Product {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 
     public List<Review> getReviews() { return reviews; }
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }
