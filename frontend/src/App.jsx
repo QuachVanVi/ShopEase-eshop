@@ -5,6 +5,7 @@ import ProductGrid from './pages/ProductGrid';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import { CartProvider } from './context/CartContext';
 
 function HomeOrGrid() {
   const [searchParams] = useSearchParams();
@@ -17,23 +18,25 @@ function HomeOrGrid() {
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-surface flex flex-col font-sans">
-        <Navbar />
-        
-        <div className="flex flex-1 mx-auto w-full max-w-[1600px]">
-          <Sidebar />
+    <CartProvider>
+      <Router>
+        <div className="min-h-screen bg-surface flex flex-col font-sans">
+          <Navbar />
           
-          <main className="flex-1 w-full relative">
-            <Routes>
-              <Route path="/" element={<HomeOrGrid />} />
-              <Route path="/product/:id" element={<ProductDetail />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </main>
+          <div className="flex flex-1 mx-auto w-full max-w-[1600px]">
+            <Sidebar />
+            
+            <main className="flex-1 w-full relative">
+              <Routes>
+                <Route path="/" element={<HomeOrGrid />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </main>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </CartProvider>
   );
 }
 

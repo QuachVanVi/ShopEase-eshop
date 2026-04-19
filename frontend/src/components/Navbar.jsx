@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, PieChart, Heart } from 'lucide-react';
+import { ShoppingCart, Search, PieChart, Heart, X } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export default function Navbar() {
+  const { cartItems, isCartOpen, setIsCartOpen, toggleCart, removeFromCart } = useCart();
+  const cartTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-surface border-b border-gray-100">
+    <>
+    <header className="sticky top-0 z-40 w-full bg-surface border-b border-gray-100">
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo */}
@@ -38,10 +44,10 @@ export default function Navbar() {
           <button className="text-gray-600 hover:text-gray-900 transition-colors">
             <Heart className="w-5 h-5 fill-current" />
           </button>
-          <button className="text-gray-600 hover:text-gray-900 transition-colors relative">
+          <button onClick={toggleCart} className="text-gray-600 hover:text-gray-900 transition-colors relative">
             <ShoppingCart className="w-5 h-5" />
             <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center w-4 h-4 bg-[#e68421] text-white text-[10px] font-bold rounded-full border-2 border-surface">
-              0
+              {cartCount}
             </span>
           </button>
           
@@ -51,5 +57,72 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+
+    {/* Cart Slide-over */}
+    {isCartOpen && (
+      <div className="fixed inset-0 z-50 overflow-hidden">
+        <div className="absolute inset-0 bg-black/50 transition-opacity" onClick={() => setIsCartOpen(false)} />
+        <div className="absolute inset-y-0 right-0 max-w-full flex">
+          <div className="w-screen max-w-md w-full bg-white shadow-xl flex flex-col h-screen overflow-y-scroll pointer-events-auto border-l border-gray-100">
+            <div className="px-4 pt-6 pb-2 sm:px-6 flex items-start justify-between">
+              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Shopping Cart</h2>
+              <button 
+                onClick={() => setIsCartOpen(false)}
+                className="text-gray-400 hover:text-gray-900 transition-colors p-2"
+               >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            
+            <div className="mt-4 px-4 sm:px-6 flex-1 pb-6">
+              {cartItems.length === 0 ? (
+                <div className="text-center py-20 text-gray-500 font-medium">Your cart is currently empty.</div>
+              ) : (
+                <ul className="space-y-6">
+                  {cartItems.map((item) => (
+                    <li key={item.id} className="flex py-2">
+                       <div className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-100">
+                         <img src={item.imageUrl} alt={item.name} className="h-full w-full object-cover object-center bg-gray-50 mix-blend-multiply" />
+                       </div>
+                       <div className="ml-4 flex flex-1 flex-col">
+                          <div>
+                            <div className="flex justify-between text-base font-extrabold text-gray-900 tracking-tight">
+                              <h3>{item.name}</h3>
+                              <p className="ml-4">${(item.price * item.quantity).toFixed(2)}</p>
+                            </div>
+                            <p className="mt-1 text-xs font-semibold text-gray-500">{item.brand}</p>
+                          </div>
+                          <div className="flex flex-1 items-end justify-between text-sm">
+                            <p className="text-gray-500 font-bold">Qty {item.quantity}</p>
+                            <button onClick={() => removeFromCart(item.id)} type="button" className="font-extrabold text-[11px] uppercase tracking-wider text-red-500 hover:text-red-700">
+                              Remove
+                            </button>
+                          </div>
+                       </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            {cartItems.length > 0 && (
+              <div className="border-t border-gray-100 px-4 py-8 sm:px-6 bg-gray-50">
+                <div className="flex justify-between text-lg font-extrabold text-gray-900 tracking-tight">
+                  <p>Subtotal</p>
+                  <p>${cartTotal.toFixed(2)}</p>
+                </div>
+                <p className="mt-1 text-xs font-medium text-gray-500">Shipping and taxes calculated at checkout.</p>
+                <div className="mt-6">
+                  <button className="w-full bg-[#1c2223] text-white py-4 rounded-xl text-sm font-bold tracking-wide hover:bg-black transition-colors">
+                    PROCEED TO CHECKOUT
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Star, Truck, ShieldBan, ShieldCheck } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Fetch product details
     fetch(`http://localhost:8080/api/products/${id}`)
       .then(res => res.json())
@@ -131,7 +134,7 @@ export default function ProductDetail() {
             </div>
 
             <div className="space-y-3">
-              <button className="w-full py-4 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+              <button onClick={() => addToCart(product)} className="w-full py-4 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                 ADD TO CART
               </button>
               <button className="w-full py-4 bg-white text-gray-900 border-2 border-gray-200 text-sm font-bold rounded-xl hover:border-gray-300 transition-colors">

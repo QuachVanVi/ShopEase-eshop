@@ -71,9 +71,9 @@ export default function Home() {
         <div className="flex gap-6">
           {deals.map(deal => (
             <Link to={`/product/${deal.id}`} key={deal.id} className="group w-1/4">
-              <div className="bg-[#1c2223] rounded-xl aspect-[4/5] relative overflow-hidden mb-4 flex items-center justify-center p-8">
-                <div className="absolute top-4 right-4 bg-white px-3 py-1 text-xs font-bold rounded-full text-gray-900 shadow-sm">-20%</div>
-                <img src={deal.imageUrl} alt={deal.name} className="w-full h-full object-contain mix-blend-screen opacity-90 group-hover:scale-105 transition-transform duration-500" />
+              <div className="bg-[#1c2223] rounded-xl aspect-[4/5] relative overflow-hidden mb-4">
+                <div className="absolute top-4 right-4 bg-red-600 px-3 py-1 text-xs font-bold rounded-full text-white shadow-sm z-10">-20%</div>
+                <img src={deal.imageUrl} alt={deal.name} className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h3 className="text-[13px] font-extrabold text-gray-900 leading-tight mb-1">{deal.name}</h3>
               <p className="text-xs text-gray-400 font-medium mb-2">{deal.brand}</p>
