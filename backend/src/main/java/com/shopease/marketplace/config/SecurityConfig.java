@@ -1,4 +1,4 @@
-package com.curated.marketplace.config;
+package com.shopease.marketplace.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class SecurityConfig {
             .cors(withDefaults())
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/auth/**", "/api/products/**", "/api/reviews/**").permitAll()
+                .requestMatchers("/api/auth/**", "/api/products/**", "/api/reviews/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();

@@ -39,7 +39,7 @@ export default function Login() {
       <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-ambient z-10 mx-4 border border-gray-100">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-          <p className="text-sm text-gray-500">Sign in to access your curated experience.</p>
+          <p className="text-sm text-gray-500">Sign in to access your ShopEase experience.</p>
         </div>
 
         {error && <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100">{error}</div>}

@@ -1,7 +1,7 @@
-package com.curated.marketplace.controller;
+package com.shopease.marketplace.controller;
 
-import com.curated.marketplace.entity.Product;
-import com.curated.marketplace.repository.ProductRepository;
+import com.shopease.marketplace.entity.Product;
+import com.shopease.marketplace.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

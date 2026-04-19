@@ -1,9 +1,9 @@
-package com.curated.marketplace.controller;
+package com.shopease.marketplace.controller;
 
-import com.curated.marketplace.dto.LoginRequest;
-import com.curated.marketplace.dto.LoginResponse;
-import com.curated.marketplace.entity.User;
-import com.curated.marketplace.repository.UserRepository;
+import com.shopease.marketplace.dto.LoginRequest;
+import com.shopease.marketplace.dto.LoginResponse;
+import com.shopease.marketplace.entity.User;
+import com.shopease.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

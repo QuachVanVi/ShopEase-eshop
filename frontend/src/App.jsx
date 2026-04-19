@@ -1,9 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import ProductGrid from './pages/ProductGrid';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
+import Home from './pages/Home';
+
+function HomeOrGrid() {
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
+  if (category && category !== 'Home') {
+    return <ProductGrid />;
+  }
+  return <Home />;
+}
 
 function App() {
   return (
@@ -16,7 +26,7 @@ function App() {
           
           <main className="flex-1 w-full relative">
             <Routes>
-              <Route path="/" element={<ProductGrid />} />
+              <Route path="/" element={<HomeOrGrid />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/login" element={<Login />} />
             </Routes>

@@ -1,4 +1,4 @@
-package com.curated.marketplace.entity;
+package com.shopease.marketplace.entity;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

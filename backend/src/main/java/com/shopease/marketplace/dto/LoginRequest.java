@@ -1,4 +1,4 @@
-package com.curated.marketplace.dto;
+package com.shopease.marketplace.dto;
 
 public class LoginRequest {
     private String username;

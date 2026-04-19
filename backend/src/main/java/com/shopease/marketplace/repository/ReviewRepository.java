@@ -1,6 +1,6 @@
-package com.curated.marketplace.repository;
+package com.shopease.marketplace.repository;
 
-import com.curated.marketplace.entity.Review;
+import com.shopease.marketplace.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

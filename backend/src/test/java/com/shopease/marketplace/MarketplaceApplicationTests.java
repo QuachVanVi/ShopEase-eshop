@@ -1,4 +1,4 @@
-package com.curated.marketplace;
+package com.shopease.marketplace;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

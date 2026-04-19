@@ -1,6 +1,6 @@
-package com.curated.marketplace.repository;
+package com.shopease.marketplace.repository;
 
-import com.curated.marketplace.entity.Product;
+import com.shopease.marketplace.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {

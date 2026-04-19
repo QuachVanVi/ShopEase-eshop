@@ -1,9 +1,9 @@
-package com.curated.marketplace.bootstrap;
+package com.shopease.marketplace.bootstrap;
 
-import com.curated.marketplace.entity.Product;
-import com.curated.marketplace.entity.User;
-import com.curated.marketplace.repository.ProductRepository;
-import com.curated.marketplace.repository.UserRepository;
+import com.shopease.marketplace.entity.Product;
+import com.shopease.marketplace.entity.User;
+import com.shopease.marketplace.repository.ProductRepository;
+import com.shopease.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,9 +66,9 @@ public class DummyDataLoader implements CommandLineRunner {
             products.add(new Product("Monstera Deliciosa Plant", "Botany", new BigDecimal("45.00"), 35, "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&q=80&w=600", "Lush indoor Swiss Cheese plant in ceramic pot.", "Home & Garden"));
             products.add(new Product("Brass Pour-Over Kettle", "Brew", new BigDecimal("65.00"), 18, "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=600", "Gooseneck coffee kettle with built-in thermometer.", "Home & Garden"));
             products.add(new Product("Minimalist Desk Lamp", "Lumina", new BigDecimal("89.00"), 25, "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=600", "Brushed metal adjustable LED reading lamp.", "Home & Garden"));
-            products.add(new Product("Ceramic Espresso Cups", "Artisan", new BigDecimal("32.00"), 50, "https://images.unsplash.com/photo-1610708688439-d3bd59ed7ee6?auto=format&fit=crop&q=80&w=600", "Set of two handcrafted ceramic espresso cups.", "Home & Garden"));
-            products.add(new Product("Organic Cotton Throw", "Haven", new BigDecimal("65.00"), 40, "https://images.unsplash.com/photo-1580828369019-2220f1883c58?auto=format&fit=crop&q=80&w=600", "Cozy, breathable organic cotton throw blanket.", "Home & Garden"));
-            products.add(new Product("Eucalyptus Scented Candle", "Aura", new BigDecimal("28.00"), 75, "https://images.unsplash.com/photo-1603006905003-7470941dc4b1?auto=format&fit=crop&q=80&w=600", "Hand-poured soy wax candle with botanical scents.", "Home & Garden"));
+            products.add(new Product("Ceramic Espresso Cups", "Artisan", new BigDecimal("32.00"), 50, "/ceramic_espresso_cups.png", "Set of two handcrafted ceramic espresso cups.", "Home & Garden"));
+            products.add(new Product("Organic Cotton Throw", "Haven", new BigDecimal("65.00"), 40, "/organic_cotton_throw.png", "Cozy, breathable organic cotton throw blanket.", "Home & Garden"));
+            products.add(new Product("Eucalyptus Scented Candle", "Aura", new BigDecimal("28.00"), 75, "/eucalyptus_scented_candle.png", "Hand-poured soy wax candle with botanical scents.", "Home & Garden"));
             products.add(new Product("Terrazzo Plant Stand", "Stone", new BigDecimal("120.00"), 5, "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600", "Mid-century modern terrazzo pedestal stand.", "Home & Garden"));
 
             productRepository.saveAll(products);

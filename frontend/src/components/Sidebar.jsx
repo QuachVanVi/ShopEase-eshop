@@ -1,74 +1,54 @@
-import { Home, Monitor, Shirt, Leaf, Star } from 'lucide-react';
+import { Home, Monitor, Shirt, Leaf, Sparkles, Star } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 export default function Sidebar() {
   const [searchParams] = useSearchParams();
   const currentCategory = searchParams.get('category');
 
-  const getSidebarClass = (categoryName) => {
-    return currentCategory === categoryName || (!currentCategory && categoryName === 'Home')
-      ? "flex items-center gap-3 px-4 py-2.5 bg-blue-100/50 text-blue-900 rounded-lg font-medium text-sm transition-colors"
-      : "flex items-center gap-3 px-4 py-2.5 text-gray-600 hover:bg-gray-100 rounded-lg font-medium text-sm transition-colors";
+  // If no category is selected, 'Home' is the active one in the navigation context
+  const isActive = (categoryName) => {
+    if (categoryName === 'Home' && !currentCategory) return true;
+    return currentCategory === categoryName;
   };
 
-  const getIconClass = (categoryName) => {
-    return currentCategory === categoryName || (!currentCategory && categoryName === 'Home')
-      ? "w-5 h-5 text-blue-700"
-      : "w-5 h-5 text-gray-500";
-  };
+  const categories = [
+    { name: 'Home', icon: Home, path: '/' },
+    { name: 'Electronics', icon: Monitor, path: '/?category=Electronics' },
+    { name: 'Apparel', icon: Shirt, path: '/?category=Fashion' },
+    { name: 'Home & Garden', icon: Leaf, path: `/?category=${encodeURIComponent('Home & Garden')}` },
+    { name: 'Wellness', icon: Sparkles, path: '/?category=Wellness' },
+    { name: 'Curated', icon: Star, path: '/?category=Curated' }
+  ];
 
   return (
-    <aside className="w-64 shrink-0 px-6 py-8 border-r border-gray-100 hidden lg:block bg-surface mix-blend-multiply sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
-      <div className="mb-10">
-        <h3 className="text-xs font-bold text-gray-900 tracking-wider mb-4 uppercase">Categories</h3>
-        <ul className="space-y-1">
-          <li>
-            <Link to="/" className={getSidebarClass('Home')}>
-              <Home className={getIconClass('Home')} /> Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/?category=Electronics" className={getSidebarClass('Electronics')}>
-              <Monitor className={getIconClass('Electronics')} /> Electronics
-            </Link>
-          </li>
-          <li>
-            <Link to="/?category=Fashion" className={getSidebarClass('Fashion')}>
-              <Shirt className={getIconClass('Fashion')} /> Fashion
-            </Link>
-          </li>
-          <li>
-            <Link to={`/?category=${encodeURIComponent('Home & Garden')}`} className={getSidebarClass('Home & Garden')}>
-              <Leaf className={getIconClass('Home & Garden')} /> Home & Garden
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 className="text-xs font-bold text-gray-900 tracking-wider mb-4 uppercase">Filters</h3>
+    <aside className="w-[280px] shrink-0 pt-10 pb-8 pr-12 hidden lg:block bg-surface sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
+      <div className="mb-12">
+        <h2 className="text-[15px] font-extrabold text-gray-900 mb-1">Collections</h2>
+        <p className="text-[10px] font-extrabold text-gray-400 tracking-[0.2em] mb-6 uppercase">The Editorial Selection</p>
         
-        <div className="mb-8">
-          <h4 className="text-sm font-semibold text-gray-800 mb-3">Price Range</h4>
-          <div className="flex flex-wrap gap-2">
-            <button className="px-3 py-1.5 bg-gray-200/60 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition">Under $50</button>
-            <button className="px-3 py-1.5 bg-gray-200 rounded-full text-xs font-medium text-gray-900 transition">$50 - $150</button>
-            <button className="px-3 py-1.5 bg-gray-200/60 hover:bg-gray-200 rounded-full text-xs font-medium text-gray-700 transition">Over $150</button>
-          </div>
-        </div>
+        <ul className="space-y-1">
+          {categories.map((cat) => (
+            <li key={cat.name}>
+              <Link 
+                to={cat.path} 
+                className={`flex items-center gap-4 px-3 py-2.5 rounded-md text-sm font-semibold transition-all ${
+                  isActive(cat.name) 
+                    ? "text-[#e68421] bg-orange-50/50" 
+                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+                }`}
+              >
+                <cat.icon className={`w-4 h-4 ${isActive(cat.name) ? "text-[#e68421]" : "text-gray-400"}`} strokeWidth={2.5} />
+                {cat.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-        <div>
-          <h4 className="text-sm font-semibold text-gray-800 mb-3">Customer Rating</h4>
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-            <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-            <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-            <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
-            <Star className="w-4 h-4 fill-gray-200 text-gray-200" />
-            <span className="text-xs font-bold text-gray-600 ml-1">& Up</span>
-          </div>
-        </div>
+        <button className="mt-6 ml-3 text-[11px] font-extrabold text-[#e68421] tracking-wide hover:text-[#d4781c] transition-colors">
+          View All Categories
+        </button>
       </div>
+
     </aside>
   );
 }
