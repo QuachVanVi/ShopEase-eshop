@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Star, Truck, ShieldBan, ShieldCheck } from 'lucide-react';
+import { Star, Truck, ShieldBan, ShieldCheck, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
@@ -137,9 +139,25 @@ export default function ProductDetail() {
               <button onClick={() => addToCart(product)} className="w-full py-4 bg-primary text-white text-sm font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
                 ADD TO CART
               </button>
-              <button className="w-full py-4 bg-white text-gray-900 border-2 border-gray-200 text-sm font-bold rounded-xl hover:border-gray-300 transition-colors">
-                BUY NOW
-              </button>
+              <div className="flex gap-3">
+                <button className="flex-1 py-4 bg-white text-gray-900 border-2 border-gray-200 text-sm font-bold rounded-xl hover:border-gray-300 transition-colors">
+                  BUY NOW
+                </button>
+                <button 
+                  onClick={() => {
+                    const success = toggleWishlist(product.id);
+                    if (!success) navigate('/login');
+                  }}
+                  className={`px-4 py-4 border-2 rounded-xl transition-all ${
+                    isInWishlist(product.id) 
+                      ? "border-red-100 bg-red-50 text-red-500" 
+                      : "border-gray-200 text-gray-400 hover:border-gray-300 hover:text-gray-600"
+                  }`}
+                  title={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+                >
+                  <Heart className={`w-5 h-5 ${isInWishlist(product.id) ? "fill-current" : ""}`} />
+                </button>
+              </div>
             </div>
 
             <div className="mt-8 space-y-4">

@@ -7,6 +7,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { WishlistProvider } from './context/WishlistContext';
+import Profile from './pages/Profile';
 
 function HomeOrGrid() {
   const [searchParams] = useSearchParams();
@@ -19,7 +23,10 @@ function HomeOrGrid() {
 
 function App() {
   return (
-    <CartProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <WishlistProvider>
+          <CartProvider>
       <Router>
         <div className="min-h-screen bg-surface flex flex-col font-sans">
           <Navbar />
@@ -33,12 +40,16 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </main>
           </div>
         </div>
       </Router>
-    </CartProvider>
+          </CartProvider>
+        </WishlistProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

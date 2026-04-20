@@ -2,7 +2,9 @@ package com.shopease.marketplace.entity;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +26,15 @@ public class User {
     private String address;
     private String phoneNumber;
     private String country;
+    
+    @ElementCollection
+    @CollectionTable(name = "user_wishlist", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "product_id")
+    private Set<Long> wishlistProductIds = new HashSet<>();
+
+    private String cardNumber;
+    private String cardExpiry;
+    private String cardHolderName;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
@@ -61,6 +72,18 @@ public class User {
 
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
+
+    public Set<Long> getWishlistProductIds() { return wishlistProductIds; }
+    public void setWishlistProductIds(Set<Long> wishlistProductIds) { this.wishlistProductIds = wishlistProductIds; }
+
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
+
+    public String getCardExpiry() { return cardExpiry; }
+    public void setCardExpiry(String cardExpiry) { this.cardExpiry = cardExpiry; }
+
+    public String getCardHolderName() { return cardHolderName; }
+    public void setCardHolderName(String cardHolderName) { this.cardHolderName = cardHolderName; }
 
     public List<Review> getReviews() { return reviews; }
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }

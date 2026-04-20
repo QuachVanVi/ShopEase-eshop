@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Heart } from 'lucide-react';
+import { useWishlist } from '../context/WishlistContext';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -7,6 +9,8 @@ export default function Home() {
   
   // 4 hours in seconds: 4*3600 + 12*60 + 35 = 15155
   const [timeLeft, setTimeLeft] = useState(15155);
+  const navigate = useNavigate();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -90,6 +94,23 @@ export default function Home() {
             <Link to={`/product/${deal.id}`} key={deal.id} className="group w-1/4">
               <div className="bg-[#1c2223] rounded-xl aspect-[4/5] relative overflow-hidden mb-4">
                 <div className="absolute top-4 right-4 bg-red-600 px-3 py-1 text-xs font-bold rounded-full text-white shadow-sm z-10">-20%</div>
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const success = toggleWishlist(deal.id);
+                    if (!success) navigate('/login');
+                  }}
+                  className="absolute top-4 left-4 p-2 bg-white/10 backdrop-blur-md rounded-full shadow-sm z-20 hover:scale-110 transition-transform active:scale-95 group/heart"
+                >
+                  <Heart 
+                    className={`w-4 h-4 transition-colors ${
+                      isInWishlist(deal.id) 
+                        ? "fill-red-500 text-red-500" 
+                        : "text-white/60 group-hover/heart:text-red-400"
+                    }`} 
+                  />
+                </button>
                 <img src={deal.imageUrl} alt={deal.name} className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h3 className="text-[13px] font-extrabold text-gray-900 leading-tight mb-1">{deal.name}</h3>
@@ -112,6 +133,23 @@ export default function Home() {
           {/* Big Item */}
           {recommended1 && (
             <Link to={`/product/${recommended1.id}`} className="w-[60%] bg-[#121314] rounded-2xl overflow-hidden relative group">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const success = toggleWishlist(recommended1.id);
+                    if (!success) navigate('/login');
+                  }}
+                  className="absolute top-8 right-8 p-3 bg-white/10 backdrop-blur-md rounded-full shadow-sm z-20 hover:scale-110 transition-transform active:scale-95 group/heart"
+                >
+                  <Heart 
+                    className={`w-5 h-5 transition-colors ${
+                      isInWishlist(recommended1.id) 
+                        ? "fill-red-500 text-red-500" 
+                        : "text-white/40 group-hover/heart:text-red-400"
+                    }`} 
+                  />
+                </button>
               <img src={recommended1.imageUrl} alt={recommended1.name} className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity" />
               <div className="absolute bottom-10 left-10 z-10">
                 <p className="text-white/70 text-[10px] font-extrabold tracking-[0.15em] mb-2 uppercase">{recommended1.brand}</p>

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { Star, CheckCircle, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Star, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { useWishlist } from '../context/WishlistContext';
 
 export default function ProductGrid() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   
   const currentCategory = searchParams.get('category');
 
@@ -73,6 +76,25 @@ export default function ProductGrid() {
                   className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                 />
                 
+                {/* Wishlist Button */}
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const success = toggleWishlist(product.id);
+                    if (!success) navigate('/login');
+                  }}
+                  className="absolute top-2 right-2 p-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm z-20 hover:scale-110 transition-transform active:scale-95 group/heart"
+                >
+                  <Heart 
+                    className={`w-4 h-4 transition-colors ${
+                      isInWishlist(product.id) 
+                        ? "fill-red-500 text-red-500" 
+                        : "text-gray-400 group-hover/heart:text-red-400"
+                    }`} 
+                  />
+                </button>
+
                 {/* Sale / Best Seller Label */}
                 {label && (
                   <div className={`absolute top-2 left-2 px-2.5 py-1 text-[10px] font-extrabold tracking-wide uppercase rounded-full border ${labelColor} shadow-sm z-10`}>

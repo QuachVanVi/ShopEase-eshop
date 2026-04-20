@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, PieChart, Heart, X } from 'lucide-react';
+import { ShoppingCart, Search, PieChart, Heart, X, User, LogOut } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const { cartItems, isCartOpen, setIsCartOpen, toggleCart, removeFromCart } = useCart();
+  const { user, logout } = useAuth();
   const cartTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -51,9 +53,31 @@ export default function Navbar() {
             </span>
           </button>
           
-          <Link to="/login" className="ml-2 bg-[#e68421] hover:bg-[#d4781c] text-white px-5 py-2 rounded text-sm font-semibold transition-colors">
-            Sign In
-          </Link>
+          
+          {user ? (
+            <div className="flex items-center gap-4 ml-2">
+              <Link 
+                to="/profile" 
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-sm font-semibold transition-all border border-gray-200 group"
+              >
+                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <User className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <span>{user}</span>
+              </Link>
+              <button 
+                onClick={logout}
+                className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                title="Sign Out"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="ml-2 bg-[#e68421] hover:bg-[#d4781c] text-white px-5 py-2 rounded text-sm font-semibold transition-colors">
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </header>
