@@ -4,6 +4,23 @@ import { Link } from 'react-router-dom';
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // 4 hours in seconds: 4*3600 + 12*60 + 35 = 15155
+  const [timeLeft, setTimeLeft] = useState(15155);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${h} : ${m} : ${s}`;
+  };
 
   useEffect(() => {
     fetch('http://localhost:8080/api/products')
@@ -62,7 +79,7 @@ export default function Home() {
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Deals of the Day</h2>
             <div className="flex items-center gap-3">
               <span className="bg-[#f0a600] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">Time Remaining</span>
-              <span className="text-xl font-bold text-gray-800 tabular-nums">04 : 12 : 35</span>
+              <span className="text-xl font-bold text-gray-800 tabular-nums">{formatTime(timeLeft)}</span>
             </div>
           </div>
           <button className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors">View All Deals →</button>

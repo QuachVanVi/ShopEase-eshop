@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import ProductGrid from './pages/ProductGrid';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Home from './pages/Home';
 import { CartProvider } from './context/CartContext';
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/" element={<HomeOrGrid />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
               </Routes>
             </main>
           </div>

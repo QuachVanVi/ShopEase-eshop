@@ -2,6 +2,7 @@ package com.shopease.marketplace.controller;
 
 import com.shopease.marketplace.dto.LoginRequest;
 import com.shopease.marketplace.dto.LoginResponse;
+import com.shopease.marketplace.dto.RegisterRequest;
 import com.shopease.marketplace.entity.User;
 import com.shopease.marketplace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,25 @@ public class AuthController {
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username is already taken");
+        }
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setEmail(request.getEmail());
+        user.setAddress(request.getAddress());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setCountry(request.getCountry());
+        user.setRole("USER");
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok("User registered successfully");
     }
 }

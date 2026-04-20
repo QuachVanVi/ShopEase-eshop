@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -56,7 +56,10 @@ export default function Login() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <a href="#" className="text-sm font-medium text-primary hover:text-primary/80 hover:underline transition-colors" onClick={(e) => e.preventDefault()}>Forgot your password?</a>
+            </div>
             <input 
               type="password" 
               className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
@@ -71,6 +74,13 @@ export default function Login() {
           >
             Sign In
           </button>
+
+          <div className="mt-6 text-center text-sm text-gray-600">
+            <span>Don't have an account? </span>
+            <Link to="/register" className="font-medium text-primary hover:text-primary/80 hover:underline transition-colors">
+              Become a member now
+            </Link>
+          </div>
         </form>
       </div>
     </div>
