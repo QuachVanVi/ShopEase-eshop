@@ -32,10 +32,6 @@ public class User {
     @Column(name = "product_id")
     private Set<Long> wishlistProductIds = new HashSet<>();
 
-    private String cardNumber;
-    private String cardExpiry;
-    private String cardHolderName;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
@@ -75,15 +71,6 @@ public class User {
 
     public Set<Long> getWishlistProductIds() { return wishlistProductIds; }
     public void setWishlistProductIds(Set<Long> wishlistProductIds) { this.wishlistProductIds = wishlistProductIds; }
-
-    public String getCardNumber() { return cardNumber; }
-    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
-
-    public String getCardExpiry() { return cardExpiry; }
-    public void setCardExpiry(String cardExpiry) { this.cardExpiry = cardExpiry; }
-
-    public String getCardHolderName() { return cardHolderName; }
-    public void setCardHolderName(String cardHolderName) { this.cardHolderName = cardHolderName; }
 
     public List<Review> getReviews() { return reviews; }
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }

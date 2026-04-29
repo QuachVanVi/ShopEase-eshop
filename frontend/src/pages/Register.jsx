@@ -63,7 +63,7 @@ export default function Register() {
             <input 
               type="text" 
               name="username"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={formData.username}
               onChange={handleChange}
               required
@@ -74,7 +74,7 @@ export default function Register() {
             <input 
               type="email" 
               name="email"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={formData.email}
               onChange={handleChange}
               required
@@ -85,7 +85,7 @@ export default function Register() {
             <input 
               type="text" 
               name="address"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={formData.address}
               onChange={handleChange}
               required
@@ -97,7 +97,7 @@ export default function Register() {
               <input 
                 type="tel" 
                 name="phoneNumber"
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 required
@@ -108,7 +108,7 @@ export default function Register() {
               <input 
                 type="text" 
                 name="country"
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
                 value={formData.country}
                 onChange={handleChange}
                 required
@@ -120,7 +120,7 @@ export default function Register() {
             <input 
               type="password" 
               name="password"
-              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={formData.password}
               onChange={handleChange}
               required

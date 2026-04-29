@@ -5,14 +5,21 @@ const WishlistContext = createContext();
 
 export function WishlistProvider({ children }) {
   const { user } = useAuth();
-  const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem(`wishlist_${user || 'guest'}`);
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [wishlist, setWishlist] = useState([]);
 
+  // 1. Sync state from localStorage when the user changes
   useEffect(() => {
-    localStorage.setItem(`wishlist_${user || 'guest'}`, JSON.stringify(wishlist));
-  }, [wishlist, user]);
+    const key = `wishlist_${user || 'guest'}`;
+    const saved = localStorage.getItem(key);
+    setWishlist(saved ? JSON.parse(saved) : []);
+  }, [user]);
+
+  // 2. Save only when the actual wishlist state is modified
+  useEffect(() => {
+    if (user || wishlist.length > 0) { // Avoid saving empty guest lists unnecessarily
+      localStorage.setItem(`wishlist_${user || 'guest'}`, JSON.stringify(wishlist));
+    }
+  }, [wishlist]);
 
   const toggleWishlist = (productId) => {
     if (!user) return false; // Indicate failure if not logged in

@@ -34,7 +34,8 @@ public class DummyDataLoader implements CommandLineRunner {
             userRepository.saveAll(Arrays.asList(admin, user));
         }
 
-        if (productRepository.count() == 0) {
+        if (productRepository.count() != 43) {
+            productRepository.deleteAll();
             List<Product> products = new ArrayList<>();
 
             products.add(new Product("SonicMaster Studio Pro Gen II", "Studio Tech", new BigDecimal("299.00"), 10, "/sonicmaster.png", "High-fidelity wireless studio headphones featuring active noise cancellation and premium comfort.", "Electronics"));
@@ -70,6 +71,33 @@ public class DummyDataLoader implements CommandLineRunner {
             products.add(new Product("Organic Cotton Throw", "Haven", new BigDecimal("65.00"), 40, "/organic_cotton_throw.png", "Cozy, breathable organic cotton throw blanket.", "Home & Garden"));
             products.add(new Product("Eucalyptus Scented Candle", "Aura", new BigDecimal("28.00"), 75, "/eucalyptus_scented_candle.png", "Hand-poured soy wax candle with botanical scents.", "Home & Garden"));
             products.add(new Product("Terrazzo Plant Stand", "Stone", new BigDecimal("120.00"), 5, "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600", "Mid-century modern terrazzo pedestal stand.", "Home & Garden"));
+
+            // BEAUTY (4)
+            products.add(new Product("Glow Serum Refiner", "Lume", new BigDecimal("55.00"), 30, "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600", "Vitamin C enriched serum for radiant skin.", "Beauty"));
+            products.add(new Product("Rose Clay Mask", "Terra", new BigDecimal("38.00"), 25, "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=600", "Deep cleansing botanical facial mask.", "Beauty"));
+            products.add(new Product("Silk Night Repair", "Luxe", new BigDecimal("85.00"), 15, "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600", "Overnight rejuvenation cream with silk peptides.", "Beauty"));
+            products.add(new Product("HydraMist Floral Toner", "Botany", new BigDecimal("24.00"), 20, "https://images.unsplash.com/photo-1556228720-195a672e8ff5?auto=format&fit=crop&q=80&w=600", "Refreshing rose and witch hazel toner.", "Beauty"));
+
+            // SPORTS (4)
+            products.add(new Product("Apex Yoga Mat", "Zenith", new BigDecimal("95.00"), 20, "/yoga_mat.png", "Premium non-slip natural rubber yoga mat.", "Sports"));
+            products.add(new Product("Core Steel Dumbbells", "Iron", new BigDecimal("120.00"), 10, "/dumbbells.png", "Set of two architectural steel dumbbells (5kg).", "Sports"));
+            products.add(new Product("Velocity Running Jacket", "Aero", new BigDecimal("145.00"), 15, "/running_jacket.png", "Weatherproof ultra-light performance jacket.", "Sports"));
+            products.add(new Product("Horizon Sports Bottle", "Flow", new BigDecimal("35.00"), 40, "/sports_bottle.png", "Insulated stainless steel hydration flask.", "Sports"));
+
+            // BOOKS (3)
+            products.add(new Product("Modernist Interiors", "Graphis", new BigDecimal("65.00"), 12, "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=600", "Hardcover collection of modern architectural spaces.", "Books"));
+            products.add(new Product("The Art of Minimalism", "Visuals", new BigDecimal("45.00"), 18, "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=600", "Exploring the philosophy of essential design.", "Books"));
+            products.add(new Product("Cinema Stills Vol 1", "Frames", new BigDecimal("75.00"), 8, "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600", "Premium coffee table book of legendary film shots.", "Books"));
+
+            // TOYS (3)
+            products.add(new Product("Articulated Wood Robot", "Craft", new BigDecimal("42.00"), 25, "https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=600", "Hand-carved articulated designer wood toy.", "Toys"));
+            products.add(new Product("Gradient Acrylic Puzzle", "Pieces", new BigDecimal("38.00"), 30, "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&q=80&w=600", "Complex 500-piece puzzle in acrylic gradient.", "Toys"));
+            products.add(new Product("Architectural Block Set", "Build", new BigDecimal("85.00"), 10, "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=600", "Neutral-toned architectural building blocks.", "Toys"));
+
+            // WELLNESS (3)
+            products.add(new Product("Rose Quartz Roller", "Aura", new BigDecimal("35.00"), 50, "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=600", "Natural rose quartz facial massage tool.", "Wellness"));
+            products.add(new Product("Pure Himalayan Salt Lamp", "Earth", new BigDecimal("45.00"), 15, "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=600", "Hand-carved crystal salt lamp for soft ambient light.", "Wellness"));
+            products.add(new Product("Essential Oil Diffuser", "Aura", new BigDecimal("75.00"), 20, "https://images.unsplash.com/photo-1602928321679-560bb453f190?auto=format&fit=crop&q=80&w=600", "Ultrasonic ceramic oil diffuser for aromatherapy.", "Wellness"));
 
             productRepository.saveAll(products);
         }

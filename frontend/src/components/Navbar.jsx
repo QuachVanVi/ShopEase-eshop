@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Search, PieChart, Heart, X, User, LogOut } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -6,8 +7,20 @@ import { useAuth } from '../context/AuthContext';
 export default function Navbar() {
   const { cartItems, isCartOpen, setIsCartOpen, toggleCart, removeFromCart } = useCart();
   const { user, logout } = useAuth();
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
   const cartTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <>
@@ -30,16 +43,18 @@ export default function Navbar() {
         </div>
 
         {/* Search Bar */}
-        <div className="hidden md:flex flex-1 max-w-[400px] mx-8 relative">
+        <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-[400px] mx-8 relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search className="h-4 w-4 text-gray-400" />
           </div>
           <input 
             type="text" 
             placeholder="Search curated collections..." 
-            className="w-full pl-9 pr-4 py-2 bg-gray-100 border border-transparent rounded-lg text-sm focus:bg-white focus:border-gray-200 focus:ring-4 focus:ring-gray-100 focus:outline-none transition-all placeholder:text-gray-400"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 bg-gray-100 border border-transparent rounded-lg text-sm text-gray-900 font-medium focus:bg-white focus:border-gray-200 focus:ring-4 focus:ring-gray-100 focus:outline-none transition-all placeholder:text-gray-400"
           />
-        </div>
+        </form>
 
         {/* Action Icons */}
         <div className="flex items-center gap-5">

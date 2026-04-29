@@ -50,29 +50,31 @@ export default function Home() {
     <div className="w-full max-w-[1200px] mx-auto py-8">
       
       {/* HERO SECTION */}
-      <div className="w-full h-[600px] bg-gradient-to-br from-[#ebebea] to-[#cfcbc6] rounded-2xl overflow-hidden relative mb-16 flex">
-        <div className="w-1/2 p-20 flex flex-col justify-center z-10">
-          <p className="text-white text-sm font-extrabold tracking-[0.2em] mb-4 uppercase drop-shadow-md">Summer Curations 2026</p>
-          <h1 className="text-white text-7xl font-extrabold leading-[0.95] tracking-tight mb-8 drop-shadow-lg">Elevated<br/>Essentials</h1>
-          <p className="text-white/90 text-lg font-medium leading-relaxed max-w-md mb-10 drop-shadow-md">
+      <div className="w-full h-[600px] bg-[#f2f1ef] rounded-3xl overflow-hidden relative mb-16 flex items-center shadow-inner border border-gray-100">
+        {/* Background Image with Gradient Mask */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-right"
+          style={{ 
+            backgroundImage: 'url("/ceramic_espresso_cups_hero.png")',
+            maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%)',
+            WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%)'
+          }}
+        />
+        
+        <div className="w-1/2 p-20 flex flex-col justify-center z-10 relative">
+          <p className="text-[#cd831f] text-[10px] font-black tracking-[0.4em] mb-4 uppercase">Sustainability • Craft • Design</p>
+          <h1 className="text-gray-900 text-7xl font-extrabold leading-[0.95] tracking-tight mb-8">Elevated<br/>Essentials</h1>
+          <p className="text-gray-600 text-lg font-medium leading-relaxed max-w-sm mb-10">
             Discover our new line of sustainable basics designed for the modern architectural lifestyle.
           </p>
           <div className="flex gap-4">
-            <button className="bg-[#cd831f] hover:bg-[#b06f18] text-white px-8 py-3.5 rounded-sm text-sm font-bold tracking-wide transition-colors">
+            <button className="bg-[#cd831f] hover:bg-[#b06f18] text-white px-8 py-4 rounded-xl text-xs font-black tracking-widest transition-all shadow-xl shadow-orange-900/20 active:scale-95">
               SHOP COLLECTION
             </button>
-            <button className="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 text-white px-8 py-3.5 rounded-sm text-sm font-bold tracking-wide transition-colors">
+            <button className="bg-white/40 hover:bg-white/60 backdrop-blur-md border border-gray-200 text-gray-900 px-8 py-4 rounded-xl text-xs font-black tracking-widest transition-all active:scale-95">
               VIEW LOOKBOOK
             </button>
           </div>
-        </div>
-        <div className="absolute right-0 top-0 w-[55%] h-full flex items-center justify-center">
-            {/* We'll use the Monstera plant image for this hero */}
-           <img 
-              src="/ceramic_espresso_cups.png" 
-              alt="Hero Concept" 
-              className="w-[120%] h-[120%] object-contain -translate-x-10 scale-125 mix-blend-multiply drop-shadow-2xl" 
-           />
         </div>
       </div>
 
@@ -212,11 +214,9 @@ export default function Home() {
 
         <div className="w-1/2 relative">
           <div className="absolute inset-0 bg-blue-50/50 rounded-bl-[100px] -z-10 translate-x-12 -translate-y-8 h-[110%]"></div>
-          <div className="bg-[#121f29] rounded-tr-[80px] rounded-bl-[80px] rounded-tl-3xl rounded-br-3xl overflow-hidden aspect-[4/3] shadow-2xl relative">
-            <img src="/router.png" alt="Smart Home" className="w-full h-full object-cover mix-blend-screen opacity-50" onError={(e) => e.target.style.display='none'}/>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Home className="w-48 h-48 text-[#28a1ce] opacity-80 drop-shadow-2xl" strokeWidth={1} />
-            </div>
+          <div className="bg-[#121f29] rounded-tr-[80px] rounded-bl-[80px] rounded-tl-3xl rounded-br-3xl overflow-hidden aspect-[4/3] shadow-2xl relative border border-white/5">
+            <img src="/smart_router.png" alt="Smart Home" className="w-full h-full object-cover opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#121f29] via-transparent to-transparent opacity-60" />
           </div>
 
           {/* Testimonial Card */}

@@ -31,9 +31,9 @@ public class UserController {
             safeUser.setCountry(user.getCountry());
             safeUser.setRole(user.getRole());
             safeUser.setWishlistProductIds(user.getWishlistProductIds());
-            safeUser.setCardNumber(user.getCardNumber());
-            safeUser.setCardExpiry(user.getCardExpiry());
-            safeUser.setCardHolderName(user.getCardHolderName());
+            safeUser.setCountry(user.getCountry());
+            safeUser.setRole(user.getRole());
+            safeUser.setWishlistProductIds(user.getWishlistProductIds());
             return ResponseEntity.ok(safeUser);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
@@ -52,11 +52,6 @@ public class UserController {
             if (updateData.getCountry() != null) user.setCountry(updateData.getCountry());
             
             if (updateData.getWishlistProductIds() != null) user.setWishlistProductIds(updateData.getWishlistProductIds());
-            
-            // Allow setting card fields to null for removal
-            user.setCardNumber(updateData.getCardNumber());
-            user.setCardExpiry(updateData.getCardExpiry());
-            user.setCardHolderName(updateData.getCardHolderName());
             
             userRepository.save(user);
             return ResponseEntity.ok("User updated successfully");

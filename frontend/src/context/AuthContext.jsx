@@ -9,15 +9,15 @@ export function AuthProvider({ children }) {
   const login = (username, userToken) => {
     localStorage.setItem('user', username);
     localStorage.setItem('token', userToken);
-    setUser(username);
-    setToken(userToken);
+    // Force a full page reload to clear all state contexts (like wishlist shadows)
+    window.location.href = '/';
   };
 
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    setUser(null);
-    setToken(null);
+    // Force a full page reload to a clean slate
+    window.location.href = '/login';
   };
 
   return (

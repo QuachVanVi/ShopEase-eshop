@@ -23,7 +23,6 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         login(data.username, data.token);
-        navigate('/');
       } else {
         setError('Invalid credentials');
       }
@@ -50,7 +49,7 @@ export default function Login() {
             <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
             <input 
               type="text" 
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -63,7 +62,7 @@ export default function Login() {
             </div>
             <input 
               type="password" 
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-gray-50 focus:bg-white text-gray-900 font-medium"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
